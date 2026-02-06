@@ -6,7 +6,20 @@ import {
   Calendar,
 } from "lucide-react";
 
-export function Contact() {
+interface ContactProps {
+  onOpenContactModal?: () => void;
+}
+
+export function Contact({ onOpenContactModal }: ContactProps) {
+  const handleContactClick = () => {
+    if (onOpenContactModal) {
+      onOpenContactModal();
+    } else {
+      // Fallback to mailto if modal handler is not provided
+      window.location.href = "mailto:vardani.product@gmail.com";
+    }
+  };
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto">
       <div className="mb-6 sm:mb-8">
@@ -74,10 +87,15 @@ export function Contact() {
                 <Download className="w-4 h-4" />
                 Download Resume
               </a>
-              <button className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+              <a
+                href="mailto:vardani.product@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+              >
                 <Mail className="w-4 h-4" />
                 Contact Me
-              </button>
+              </a>
               <a
                 href="https://cal.com/talk-with-kunal/15min"
                 target="_blank"
